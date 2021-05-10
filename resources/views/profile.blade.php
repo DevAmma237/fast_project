@@ -219,7 +219,7 @@ dark-mode
                                     </div><!-- .card-inner -->
                                     <div class="card-inner p-0">
                                         <ul class="link-list-menu">
-                                            <li><a class="active" href="html/user-profile-regular.html"><em
+                                            <li><a class="active" href="/profile"><em
                                                         class="icon ni ni-user-fill-c"></em><span> Infomation Personelle
                                                     </span></a></li>
                                             <li><a href="html/user-profile-notification.html"><em
@@ -228,7 +228,7 @@ dark-mode
                                             <li><a href="html/user-profile-activity.html"><em
                                                         class="icon ni ni-activity-round-fill"></em><span>Account
                                                         Activity</span></a></li>
-                                            <li><a href="html/user-profile-setting.html"><em
+                                            <li><a href="/profile/security"><em
                                                         class="icon ni ni-lock-alt-fill"></em><span>Security
                                                         Settings</span></a></li>
                                         </ul>
@@ -264,7 +264,8 @@ dark-mode
         <div class="modal-content">
             <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
             <div class="modal-body modal-body-lg">
-                <form action="{{url('updateName')}}" method="post" class="form-validate is-alter">
+                <form action="{{url('/profile/updateName')}}" method="post" class="form-validate is-alter">
+                    @csrf
                     <h5 class="title">Mise à jour du Profile</h5>
                     <div class="tab-content">
                         <div class="tab-pane active" id="personal">
@@ -272,15 +273,16 @@ dark-mode
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label" for="full-name">Nom</label>
-                                        <input type="text" class="form-control form-control-lg" required id="full-name"
-                                            value="{{Auth::user()->name}}" placeholder="Entrer votre Nom">
+                                        <input type="text" class="form-control form-control-lg" name="name" required
+                                            id="full-name" value="{{Auth::user()->name}}"
+                                            placeholder="Entrer votre Nom">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label" for="display-name">Prénom</label>
                                         <input type="text" class="form-control form-control-lg" required
-                                            id="display-name" value="{{Auth::user()->surname}}"
+                                            id="display-name" name="surname" value="{{Auth::user()->surname}}"
                                             placeholder="Entrer votre Prénom">
                                     </div>
                                 </div>
@@ -310,26 +312,30 @@ dark-mode
                 <h5 class="title">Mise à jour du Profile</h5>
                 <div class="tab-content">
                     <div class="tab-pane active" id="personal">
-                        <div class="row gy-4">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-label" for="full-name">Email</label>
-                                    <input type="email" required class="form-control form-control-lg" id="full-name"
-                                        value="{{Auth::user()->email}}" placeholder="Entrer votre Adresse Email">
+                        <form action="{{url('/profile/updateEmail')}}" method="post" class="form-validate is-alter">
+                            @csrf
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="full-name">Email</label>
+                                        <input type="email" name="email" required class="form-control form-control-lg"
+                                            id="full-name" value="{{Auth::user()->email}}"
+                                            placeholder="Entrer votre Adresse Email">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li>
+                                            <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
+                                        </li>
+                                        <li>
+                                            <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                                    <li>
-                                        <a href="#" class="btn btn-lg btn-primary">Enregistrer</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div><!-- .tab-pane -->
+                    </form>
                 </div><!-- .tab-content -->
             </div><!-- .modal-body -->
         </div><!-- .modal-content -->
@@ -343,25 +349,29 @@ dark-mode
                 <h5 class="title">Mise à jour du Profile</h5>
                 <div class="tab-content">
                     <div class="tab-pane active" id="personal">
-                        <div class="row gy-4">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-label" for="full-name">Nméro de Téléphone</label>
-                                    <input type="text" class="form-control form-control-lg" id="full-name"
-                                        value="{{Auth::user()->phone}}" placeholder="Entrer votre Numéro de Téléphone">
+                        <form action="{{url('/profile/updateTel')}}" method="post" class="form-validate is-alter">
+                            @csrf
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="full-name">Nméro de Téléphone</label>
+                                        <input type="text" name="phone" class="form-control form-control-lg" id="full-name"
+                                            value="{{Auth::user()->phone}}"
+                                            placeholder="Entrer votre Numéro de Téléphone">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li>
+                                            <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
+                                        </li>
+                                        <li>
+                                            <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                                    <li>
-                                        <a href="#" class="btn btn-lg btn-primary">Enregistrer</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        </form>
                     </div><!-- .tab-pane -->
                 </div><!-- .tab-content -->
             </div><!-- .modal-body -->
@@ -376,12 +386,14 @@ dark-mode
                 <h5 class="title">Mise à jour du Profile</h5>
                 <div class="tab-content">
                     <div class="tab-pane active" id="personal">
+                        <form action="{{url('/profile/updateDate')}}" method="post" class="form-validate is-alter">
+                            @csrf
                         <div class="row gy-4">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label" for="date_debut">Date de Naissance</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" name="date_debut" id="date_debut"
+                                        <input type="text" name="date"id="date_debut"
                                             class="form-control date-picker" data-date-format="yyyy-mm-dd"
                                             value='{{Auth::user()->date_naiss}}' required>
                                     </div>
@@ -390,7 +402,7 @@ dark-mode
                             <div class="col-12">
                                 <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                                     <li>
-                                        <a href="#" class="btn btn-lg btn-primary">Enregistrer</a>
+                                        <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
                                     </li>
                                     <li>
                                         <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
@@ -398,6 +410,7 @@ dark-mode
                                 </ul>
                             </div>
                         </div>
+                        </form>
                     </div><!-- .tab-pane -->
                 </div><!-- .tab-content -->
             </div><!-- .modal-body -->
@@ -412,18 +425,19 @@ dark-mode
                 <h5 class="title">Mise à jour du Profile</h5>
                 <div class="tab-content">
                     <div class="tab-pane active" id="personal">
+                        <form action="{{url('/profile/updateAdresse')}}" method="post" class="form-validate is-alter">
+                            @csrf
                         <div class="row gy-4">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-label" for="full-name">Nom</label>
-                                    <textarea rows="5" class="form-control form-control-lg" id="full-name"
-                                        value="{{Auth::user()->adresse}}" placeholder="Entrer votre adresse"></textarea>
+                                    <label class="form-label" for="full-name">Adresse</label>
+                                    <textarea rows="5" class="form-control form-control-lg" name="adresse" id="full-name" placeholder="Entrer votre adresse">{{Auth::user()->adresse}}</textarea>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                                     <li>
-                                        <a href="#" class="btn btn-lg btn-primary">Enregistrer</a>
+                                        <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
                                     </li>
                                     <li>
                                         <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
@@ -431,6 +445,7 @@ dark-mode
                                 </ul>
                             </div>
                         </div>
+                        </form>
                     </div><!-- .tab-pane -->
                 </div><!-- .tab-content -->
             </div><!-- .modal-body -->

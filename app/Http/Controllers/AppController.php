@@ -35,9 +35,10 @@ class AppController extends Controller
             ]);
 
             DB::commit();
+
+            return back();
         } catch (\Exception $e) {
         }
-        return back();
     }
 
     public function getProfile()
@@ -45,8 +46,68 @@ class AppController extends Controller
         return view('profile');
     }
 
+    public function getProfilesecurity()
+    {
+        return view('profile_security');
+    }
+
     public function setName(Request $request)
     {
-        return back();
+        try {
+            $user = User::find(Auth::user()->id);
+            $user->name = $request['name'];
+            $user->surname = $request['surname'];
+            $user->save();
+            return back();
+        } catch (\Exception $th) {
+            return 1;
+        }
+    }
+
+    public function setEmail(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+            $user->email = $request['email'];
+            $user->save();
+            return back();
+        } catch (\Exception $th) {
+            return 1;
+        }
+    }
+
+    public function setPhone(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+            $user->phone = $request['phone'];
+            $user->save();
+            return back();
+        } catch (\Exception $th) {
+            return 1;
+        }
+    }
+
+    public function setDateNaissance(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+            $user->date_naiss = $request['date'];
+            $user->save();
+            return back();
+        } catch (\Exception $th) {
+            return 1;
+        }
+    }
+    public function setAdresse(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+            $user->adresse = $request['adresse'];
+            $user->save();
+            return back();
+        } catch (\Exception $th) {
+            return 1;
+        }
     }
 }
